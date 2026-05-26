@@ -32,45 +32,6 @@ app.post("/send-otp", async (req, res) => {
 
     console.log("OTP:", otp);
 
-    // // ✅ EXACT Postman headers
-    // const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Authorization", process.env.TRACCAR_TOKEN.trim());
-
-    // const raw = JSON.stringify({
-    //   to: phone,
-    //   message: `Your OTP is ${otp}`,
-    // });
-
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: myHeaders,
-    //   body: raw,
-    //   redirect: "follow",
-    // };
-
-    // const response = await fetch("https://www.traccar.org/sms", requestOptions);
-
-    // const resultText = await response.text();
-    // console.log("TRACCAR RAW RESPONSE:", resultText);
-    // console.log(process.env.TRACCAR_TOKEN);
-
-    // const data = JSON.parse(resultText);
-
-    // // ✅ Proper validation
-    // if (!data.successCount || data.successCount === 0) {
-    //   return res.status(500).json({
-    //     success: false,
-    //     message: "SMS sending failed",
-    //     error: data,
-    //   });
-    // }
-
-    // return res.json({
-    //   success: true,
-    //   hash,
-    // });
-
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", process.env.TRACCAR_TOKEN);
@@ -111,7 +72,6 @@ app.post("/send-otp", async (req, res) => {
   }
 });
 
-// 🔹 VERIFY OTP
 app.post("/verify-otp", (req, res) => {
   try {
     const { phone, otp, hash } = req.body;
